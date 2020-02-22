@@ -1,0 +1,42 @@
+{
+	"name"        : "pressmodo/wp-admin-notices",
+	"description" : "An helper library to create persistent and dismissible WordPress admin notices.",
+	"keywords"    : [ "wordpress", "pressmodo", "admin", "notices" ],
+	"homepage"    : "https://github.com/pressmodo/wp-admin-notices",
+	"license"     : "GPL-3.0-or-later",
+	"authors"     : [
+		{
+			"name"     : "Pressmodo",
+			"email"    : "hello@pressmodo.com",
+			"homepage" : "https://pressmodo.com",
+			"role"     : "Developer"
+		},
+		{
+			"name"     : "Alessandro Tesoro",
+			"email"    : "hello@sematico.com",
+			"homepage" : "https://alessandrotesoro.me",
+			"role"     : "Developer"
+		},
+		{
+			"name"     : "Alessandro Tesoro",
+			"email"    : "hello@sematico.com",
+			"homepage" : "https://sematico",
+			"role"     : "Founder & MD"
+		}
+	],
+	"support"     : {
+		"issues" : "https://github.com/pressmodo/wp-admin-notices/issues"
+	},
+	"autoload"    : {
+		"psr-4" : {
+			"Pressmodo\\AdminNotices\\" : "src/"
+		}
+	},
+	"require": {
+		"php": ">=5.6"
+	},
+	"require-dev": {
+		"dealerdirect/phpcodesniffer-composer-installer": "^0.5.0",
+		"pressmodo/phpcs-config": "dev-master"
+	}
+}
