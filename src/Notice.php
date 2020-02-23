@@ -47,7 +47,7 @@ class Notice {
 	 *
 	 * @access public
 	 * @since 1.0
-	 * @var \Pressmodo\AdminNotices\Dismiss
+	 * @var Dismiss
 	 */
 	public $dismiss;
 
@@ -98,6 +98,13 @@ class Notice {
 		'error',
 		'warning'
 	];
+
+	/**
+	 * The title for our notice.
+	 * 
+	 * @var string
+	 */
+	private $title;
 
 	/**
 	 * Constructor.

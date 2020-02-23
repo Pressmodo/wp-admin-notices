@@ -1,4 +1,4 @@
-<?php // phpcs:ignore WordPress.Files.FileName
+<?php /** @noinspection ALL */ // phpcs:ignore WordPress.Files.FileName
 /**
  * Handles dismissing admin notices.
  *
@@ -51,9 +51,10 @@ class Dismiss {
 	 * Constructor.
 	 *
 	 * @access public
-	 * @since 1.0
-	 * @param string $id     A unique ID for this notice. Can contain lowercase characters and underscores.
+	 * @param string $id A unique ID for this notice. Can contain lowercase characters and underscores.
 	 * @param string $prefix The prefix that will be used for the option/user-meta.
+	 * @param string $scope Whether the notification is a global or user type.
+	 * @since 1.0
 	 */
 	public function __construct( $id, $prefix, $scope = 'global' ) {
 
@@ -94,7 +95,7 @@ class Dismiss {
 				postData += '&nonce=<?php echo esc_html( $nonce ); ?>';
 
 				httpRequest.open( 'POST', '<?php echo esc_url( admin_url( 'admin-ajax.php' ) ); ?>' );
-				httpRequest.setRequestHeader( 'Content-Type', 'application/x-www-form-urlencoded' )
+				httpRequest.setRequestHeader( 'Content-Type', 'application/x-www-form-urlencoded' );
 				httpRequest.send( postData );
 			});
 		});
