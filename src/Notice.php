@@ -238,7 +238,9 @@ class Notice {
 		}
 
 		if ( ! $this->options['dismissible'] ) {
-			unset( $classes['is-dismissible'] );
+			if ( ( $key = array_search( 'is-dismissible', $classes, true ) ) !== false ) {
+				unset( $classes[ $key ] );
+			}
 		}
 
 		// Combine classes to a string.
