@@ -61,10 +61,10 @@ class Dismiss {
 		// Set the object properties.
 		$this->id     = sanitize_key( $id );
 		$this->prefix = sanitize_key( $prefix );
-		$this->scope  = ( in_array( $scope, [ 'global', 'user' ], true ) ) ? $scope : 'global';
+		$this->scope  = ( in_array( $scope, array( 'global', 'user' ), true ) ) ? $scope : 'global';
 
 		// Handle AJAX requests to dismiss the notice.
-		add_action( 'wp_ajax_pressmodo_dismiss_notice', [ $this, 'ajax_maybe_dismiss_notice' ] );
+		add_action( 'wp_ajax_pressmodo_dismiss_notice', array( $this, 'ajax_maybe_dismiss_notice' ) );
 	}
 
 	/**

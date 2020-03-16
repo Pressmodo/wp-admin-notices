@@ -58,14 +58,15 @@ class Notice {
 	 * @since 1.0
 	 * @var array
 	 */
-	private $options = [
+	private $options = array(
 		'scope'         => 'global',
 		'type'          => 'info',
 		'alt_style'     => false,
 		'capability'    => 'edit_theme_options',
 		'option_prefix' => 'pressmodo_notice_dismissed',
-		'screens'       => [],
-	];
+		'screens'       => array(),
+		'dismissible'   => true,
+	);
 
 	/**
 	 * Allowed HTML in the message.
@@ -74,16 +75,16 @@ class Notice {
 	 * @since 1.0
 	 * @var array
 	 */
-	private $allowed_html = [
-		'p'      => [],
-		'a'      => [
-			'href'  => [],
-			'rel'   => [],
-		],
-		'em'     => [],
-		'strong' => [],
-		'br'     => [],
-	];
+	private $allowed_html = array(
+		'p'      => array(),
+		'a'      => array(
+			'href' => array(),
+			'rel'  => array(),
+		),
+		'em'     => array(),
+		'strong' => array(),
+		'br'     => array(),
+	);
 
 	/**
 	 * An array of allowed types.
@@ -92,16 +93,16 @@ class Notice {
 	 * @since 1.0
 	 * @var array
 	 */
-	private $allowed_types = [
+	private $allowed_types = array(
 		'info',
 		'success',
 		'error',
-		'warning'
-	];
+		'warning',
+	);
 
 	/**
 	 * The title for our notice.
-	 * 
+	 *
 	 * @var string
 	 */
 	private $title;
@@ -130,15 +131,16 @@ class Notice {
 	 *                                                        Defaults to "edit_theme_options".
 	 *                            'option_prefix' => (string) The prefix that will be used to build the option (or post-meta) name.
 	 *                                                        Can contain lowercase latin letters and underscores.
+	 *                            'dismissible'   => (bool)   Whether or not the notice can be dismissed. Defaults to true.
 	 *                        ].
 	 */
-	public function __construct( $id, $title, $message, $options = [] ) {
+	public function __construct( $id, $title, $message, $options = array() ) {
 
 		// Set the object properties.
-		$this->id         = $id;
-		$this->title      = $title;
-		$this->message    = $message;
-		$this->options    = wp_parse_args( $options, $this->options );
+		$this->id      = $id;
+		$this->title   = $title;
+		$this->message = $message;
+		$this->options = wp_parse_args( $options, $this->options );
 
 		// Sanity check: Early exit if ID or message are empty.
 		if ( ! $this->id || ! $this->message ) {
@@ -219,13 +221,13 @@ class Notice {
 	 * @return string
 	 */
 	public function get_classes() {
-		$classes = [
+		$classes = array(
 			'notice',
 			'is-dismissible',
-		];
+		);
 
 		// Make sure the defined type is allowed.
-		$this->options['type'] = in_array( $this->options['type'], $this->allowed_types ) ? $this->options['type'] : 'info';
+		$this->options['type'] = in_array( $this->options['type'], $this->allowed_types, true ) ? $this->options['type'] : 'info';
 
 		// Add the class for notice-type.
 		$classes[] = 'notice-' . $this->options['type'];
@@ -233,6 +235,10 @@ class Notice {
 		// Do we want alt styles?
 		if ( $this->options['alt_style'] ) {
 			$classes[] = 'notice-alt';
+		}
+
+		if ( ! $this->options['dismissible'] ) {
+			unset( $classes['is-dismissible'] );
 		}
 
 		// Combine classes to a string.

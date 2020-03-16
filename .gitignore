@@ -112,11 +112,4 @@ node_modules/
 npm-debug.log
 yarn-error.log
 
-.idea/.gitignore
-.idea/composerJson.xml
-.idea/inspectionProfiles/
-.idea/misc.xml
-.idea/modules.xml
-.idea/php.xml
-.idea/vcs.xml
-.idea/wp-admin-notices.iml
+.idea

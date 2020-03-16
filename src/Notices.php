@@ -31,7 +31,7 @@ class Notices {
 	 * @since 1.0
 	 * @var array
 	 */
-	private $notices = [];
+	private $notices = array();
 
 	/**
 	 * Adds actions for the notices.
@@ -43,10 +43,10 @@ class Notices {
 	public function boot() {
 
 		// Add the notice.
-		add_action( 'admin_notices', [ $this, 'the_notices' ] );
+		add_action( 'admin_notices', array( $this, 'the_notices' ) );
 
 		// Print the script to the footer.
-		add_action( 'admin_footer', [ $this, 'print_scripts' ] );
+		add_action( 'admin_footer', array( $this, 'print_scripts' ) );
 	}
 
 	/**
@@ -61,7 +61,7 @@ class Notices {
 	 *                        See Notice::__constructor() for details.
 	 * @return void
 	 */
-	public function add( $id, $title, $message, $options = [] ) {
+	public function add( $id, $title, $message, $options = array() ) {
 		$this->notices[ $id ] = new Notice( $id, $title, $message, $options );
 	}
 
