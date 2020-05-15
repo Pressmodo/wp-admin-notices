@@ -69,24 +69,6 @@ class Notice {
 	);
 
 	/**
-	 * Allowed HTML in the message.
-	 *
-	 * @access private
-	 * @since 1.0
-	 * @var array
-	 */
-	private $allowed_html = array(
-		'p'      => array(),
-		'a'      => array(
-			'href' => array(),
-			'rel'  => array(),
-		),
-		'em'     => array(),
-		'strong' => array(),
-		'br'     => array(),
-	);
-
-	/**
 	 * An array of allowed types.
 	 *
 	 * @access private
@@ -146,15 +128,6 @@ class Notice {
 		if ( ! $this->id || ! $this->message ) {
 			return;
 		}
-
-		/**
-		 * Allow filtering the allowed HTML tags array.
-		 *
-		 * @since 1.0.2
-		 * @param array The list of allowed HTML tags.
-		 * @return array
-		 */
-		$this->allowed_html = apply_filters( 'pressmodo_admin_notices_allowed_html', $this->allowed_html );
 
 		// Instantiate the Dismiss object.
 		$this->dismiss = new Dismiss( $this->id, $this->options['option_prefix'], $this->options['scope'] );
@@ -275,7 +248,7 @@ class Notice {
 	 * @return string
 	 */
 	public function get_message() {
-		return wpautop( wp_kses( $this->message, $this->allowed_html ) );
+		return wpautop( wp_kses_post( $this->message ) );
 	}
 
 	/**
